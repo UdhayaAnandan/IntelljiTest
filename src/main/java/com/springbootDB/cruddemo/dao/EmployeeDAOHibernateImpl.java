@@ -1,4 +1,5 @@
 package com.springbootDB.cruddemo.dao;
+
 import com.springbootDB.cruddemo.entity.Employee;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -13,7 +14,7 @@ import java.util.List;
 
 @Repository
 @Component
-public class EmployeeDAOHibernateImpl  implements  EmployeeDAO{
+public class EmployeeDAOHibernateImpl implements EmployeeDAO {
     //Define field for entityManager
 
     private EntityManager entityManager;
@@ -21,9 +22,9 @@ public class EmployeeDAOHibernateImpl  implements  EmployeeDAO{
     // Setup constructor injeciton
 
     @Autowired
-    public  EmployeeDAOHibernateImpl(EntityManager theEntityManager)//Constructor injection automatically created by Spring boot
+    public EmployeeDAOHibernateImpl(EntityManager theEntityManager)//Constructor injection automatically created by Spring boot
     {
-        entityManager= theEntityManager;
+        entityManager = theEntityManager;
     }
 
     @Override
@@ -34,7 +35,7 @@ public class EmployeeDAOHibernateImpl  implements  EmployeeDAO{
         Session currentSession = entityManager.unwrap(Session.class);
 
         //Create a query
-        Query<Employee> theQuery = currentSession.createQuery("from Employee",Employee.class);
+        Query<Employee> theQuery = currentSession.createQuery("from Employee", Employee.class);
 
         //execute query and get result list
 
@@ -49,7 +50,7 @@ public class EmployeeDAOHibernateImpl  implements  EmployeeDAO{
         // Get the Current Hibernate Session
         Session currentSession = entityManager.unwrap(Session.class);
         //Get the Employee
-        Employee employee = currentSession.get(Employee.class,theId);
+        Employee employee = currentSession.get(Employee.class, theId);
         return employee;
     }
 
@@ -70,7 +71,7 @@ public class EmployeeDAOHibernateImpl  implements  EmployeeDAO{
         Session currentSession = entityManager.unwrap(Session.class);
         //Delete Employee by ID
         Query query = currentSession.createQuery("Delete from Employee where id = :id");
-        query.setParameter("id",theId);
+        query.setParameter("id", theId);
         query.executeUpdate();
 
     }
